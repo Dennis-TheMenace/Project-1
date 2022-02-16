@@ -1,0 +1,28 @@
+{
+  "name": "project-1",
+  "version": "1.0.0",
+  "description": "Project 1",
+  "main": "./src/server.js",
+  "scripts": {
+    "start": "node ./src/server.js",
+    "pretest": "eslint ./src --fix",
+    "test": "echo \"Tests complete\"",
+    "nodemon": "nodemon -e js,html,css --watch ./src --watch ./client"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dennis-TheMenace/Project-1.git"
+  },
+  "author": "Alex Gray",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/Dennis-TheMenace/Project-1/issues"
+  },
+  "homepage": "https://github.com/Dennis-TheMenace/Project-1#readme",
+  "devDependencies": {
+    "eslint": "^8.9.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-import": "^2.25.4",
+    "nodemon": "^2.0.15"
+  }
+}
