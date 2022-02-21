@@ -19,12 +19,18 @@ const respondJSONMeta = (request, response, status) => {
   response.end();
 };
 
-const getUsers = (request, response) => {
+const getUsers = (request, response, params) => {
   const responseJSON = {
-    users,
+    message: 'User does not Exist',
+    id: 'userNotFound',
   };
 
-  return respondJSON(request, response, 200, responseJSON);
+  if (users[params.name]) {
+    responseJSON.message = users[params.name];
+    responseJSON.id = 'userFound';
+    return respondJSON(request, response, 200, responseJSON);
+  }
+  return respondJSON(request, response, 400, responseJSON);
 };
 
 const getUsersMeta = (request, response) => respondJSONMeta(request, response, 200);
@@ -69,6 +75,10 @@ const addUser = (request, response, body) => {
   //Add user data here
   users[body.name].name = body.name;
   users[body.name].age = body.age;
+  users[body.name].address = body.address;
+  users[body.name].phone = body.phone;
+  users[body.name].weight = body.weight;
+  users[body.name].height = body.height;
 
   if (responseCode === 201) {
     responseJSON.message = 'Created Successfully';
