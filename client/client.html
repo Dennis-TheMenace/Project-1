@@ -18,7 +18,7 @@
           break;
         case 204:
           content.innerHTML = '<b>Updated (No Content)</b>'
-          break;
+          return;
         case 400:
           content.innerHTML = '<b>Bad Request</b>';
           break;
@@ -50,16 +50,17 @@
 
     const requestGetUpdate = async (userForm) => {
       const userName = userForm.querySelector('#getNameField').value;
+      const method = 'GET'
 
       let response = await fetch(`/getUsers?name=${userName}`,
       {
-        method: 'GET',
+        method,
         headers: {
           'Accept': 'applocation/json',
         },
       });
 
-      handleResponse(response, true);
+      handleResponse(response, method !== 'HEAD');
     };
 
     const sendPost = async (nameForm) => {
