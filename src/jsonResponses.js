@@ -26,7 +26,7 @@ const getUsers = (request, response, params) => {
   };
 
   if (users[params.name]) {
-    responseJSON.message = users[params.name];
+    responseJSON.foundUser = users[params.name];
     responseJSON.id = 'userFound';
     return respondJSON(request, response, 200, responseJSON);
   }

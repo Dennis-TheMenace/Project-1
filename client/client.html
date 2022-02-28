@@ -36,9 +36,10 @@
         let resText = await response.text();
         console.log(resText);
         let resObj = JSON.parse(resText);
-        if(resObj.users)
+        if(resObj.foundUser)
         {
-          content.innerHTML += `<p>${JSON.stringify(resObj.users)}</p>`;
+          console.log(resObj.foundUser.name);
+          content.innerHTML += `<p>${JSON.stringify(resObj.foundUser.name)}</p>`;
         }
         else
         {
@@ -112,28 +113,35 @@
 </head>
 <body>
   <section id="top">
-    <h3>Doctors Form</h3>
+    <h1>Doctors Form</h1>
+    <hr>
+    <h3>Find Existing User</h3>
+    <form id="userForm" action="/getUsers" method="get">
+      <label for="getName">Name: </label>
+      <input id="getNameField" type="text" name="getName" />
+      <input type="submit" value="Search" />
+    </form>
+    <h3>Create New User</h3>
     <form id="nameForm" action="/addUser" method="post">
       <label for="name">Name: </label>
       <input id="nameField" type="text" name="name" />
       <label for="age">Age: </label>
       <input id="ageField" type="number" name="age" min="0" max="100" step="1"/>
+      <br><br>
       <label for="address">Address: </label>
       <input id="addressField" type="text" name="address" />
       <label for="phone">Phone Number: </label>
       <input id="phoneField" type="number" name="phone" min="1" max="9999999999" step="1"/>
+      <br><br>
       <label for="weight">Weight: </label>
       <input id="weightField" type="number" name="weight" min="0" max="100" step="1"/>
       <label for="height">Height: </label>
       <input id="heightField" type="number" name="height" min="0" max="100" step="1"/>
+      <br><br>
       <input type="submit" value="Add User" />
     </form>
   </section>
-  <form id="userForm" action="/getUsers" method="get">
-    <label for="getName">Name: </label>
-    <input id="getNameField" type="text" name="getName" />
-    <input type="submit" value="Get User" />
-  </form>
+  
   <section id="content">
   </section>
 </body>
