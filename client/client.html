@@ -34,12 +34,15 @@
       {
         //Turn text to object and put it where it belongs
         let resText = await response.text();
-        console.log(resText);
         let resObj = JSON.parse(resText);
         if(resObj.foundUser)
         {
-          console.log(resObj.foundUser.name);
-          content.innerHTML += `<p>${JSON.stringify(resObj.foundUser.name)}</p>`;
+          content.innerHTML += `<p>Name: ${JSON.stringify(resObj.foundUser.name)}</p>\n`;
+          content.innerHTML += `<p>Age: ${JSON.stringify(resObj.foundUser.age)}</p>\n`;
+          content.innerHTML += `<p>Address: ${JSON.stringify(resObj.foundUser.address)}</p>\n`;
+          content.innerHTML += `<p>Phone Number: ${JSON.stringify(resObj.foundUser.phone)}</p>\n`;
+          content.innerHTML += `<p>Weight: ${JSON.stringify(resObj.foundUser.weight)}</p>\n`;
+          content.innerHTML += `<p>Height: ${JSON.stringify(resObj.foundUser.height)}</p>\n`;
         }
         else
         {
@@ -86,10 +89,27 @@
       handleResponse(response, 'POST');
     };
 
+    const deleteResponse = async (userForm) =>
+    {
+      const userName = userForm.querySelector('#getNameField').value;
+
+      const response = await fetch(`/deleteUser?name=${userName}`,
+      {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application.json'
+        }
+      });
+
+      handleResponse(response, 'DELETE');
+    }
+
 
     const init = () => {
       const userForm = document.querySelector('#userForm');
       const nameForm = document.querySelector('#nameForm');
+      const searchBttn = document.querySelector('#searchUser');
+      const deleteBttn = document.querySelector('#deleteUser');
       
       const getUsers = (e) => {
         e.preventDefault();
@@ -102,9 +122,17 @@
         sendPost(nameForm);
         return false;
       }
+
+      const deleteUser = (e) =>
+      {
+        e.preventDefault();
+        deleteResponse(userForm);
+        return false;
+      }
       
-      userForm.addEventListener('submit', getUsers);
+      searchBttn.addEventListener('click', getUsers);
       nameForm.addEventListener('submit', addUser);
+      deleteBttn.addEventListener('click', deleteUser);
     };
 
     window.onload = init;
@@ -115,11 +143,12 @@
   <section id="top">
     <h1>Doctors Form</h1>
     <hr>
-    <h3>Find Existing User</h3>
+    <h3>Find Or Delete Existing User</h3>
     <form id="userForm" action="/getUsers" method="get">
       <label for="getName">Name: </label>
       <input id="getNameField" type="text" name="getName" />
-      <input type="submit" value="Search" />
+      <input id="searchUser" type="submit" value="Search" />
+      <input id="deleteUser" type="submit" value="Delete" />
     </form>
     <h3>Create New User</h3>
     <form id="nameForm" action="/addUser" method="post">

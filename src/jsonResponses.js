@@ -24,7 +24,7 @@ const getUsers = (request, response, params) => {
     message: 'User does not Exist',
     id: 'userNotFound',
   };
-
+  
   if (users[params.name]) {
     responseJSON.foundUser = users[params.name];
     responseJSON.id = 'userFound';
@@ -55,6 +55,7 @@ const notFound = (request, response) => {
   return respondJSON(request, response, 404, responseJSON);
 };
 
+//Create or Update user
 const addUser = (request, response, body) => {
   const responseJSON = {
     message: 'Name and age are both required',
@@ -88,6 +89,22 @@ const addUser = (request, response, body) => {
   return respondJSON(request, response, responseCode, responseJSON);
 };
 
+//Delete user from "Data-base"
+const deleteUser = (request, response, params) =>
+{
+  const responseJSON = {
+    message: 'User does not Exist',
+    id: 'userNotFound',
+  };
+
+  if (users[params.name]) {
+    users[params.name] = null;
+    responseJSON.message = 'User Deleted';
+    return respondJSON(request, response ,200, responseJSON)
+  }
+  return respondJSON(request, response, 400, responseJSON);
+}
+
 module.exports = {
   getUsers,
   getUsersMeta,
@@ -95,4 +112,5 @@ module.exports = {
   notRealMeta,
   notFound,
   addUser,
+  deleteUser,
 };
