@@ -24,9 +24,10 @@ const getUsers = (request, response, params) => {
     message: 'User does not Exist',
     id: 'userNotFound',
   };
-  
+
   if (users[params.name]) {
     responseJSON.foundUser = users[params.name];
+    respondJSON.message = 'User Found';
     responseJSON.id = 'userFound';
     return respondJSON(request, response, 200, responseJSON);
   }

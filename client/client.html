@@ -11,7 +11,7 @@
       switch(response.status)
       {
         case 200:
-          content.innerHTML = '<b>Success</b>'
+          content.innerHTML = '<b id="success">Success</b>'
           break;
         case 201:
           content.innerHTML = '<b>Created</b>'
@@ -34,19 +34,21 @@
       {
         //Turn text to object and put it where it belongs
         let resText = await response.text();
+        console.log(resText);
         let resObj = JSON.parse(resText);
+        console.log(resObj);
         if(resObj.foundUser)
         {
-          content.innerHTML += `<p>Name: ${JSON.stringify(resObj.foundUser.name)}</p>\n`;
-          content.innerHTML += `<p>Age: ${JSON.stringify(resObj.foundUser.age)}</p>\n`;
-          content.innerHTML += `<p>Address: ${JSON.stringify(resObj.foundUser.address)}</p>\n`;
-          content.innerHTML += `<p>Phone Number: ${JSON.stringify(resObj.foundUser.phone)}</p>\n`;
-          content.innerHTML += `<p>Weight: ${JSON.stringify(resObj.foundUser.weight)}</p>\n`;
-          content.innerHTML += `<p>Height: ${JSON.stringify(resObj.foundUser.height)}</p>\n`;
+          content.innerHTML += `<p id='name'>Name: ${JSON.stringify(resObj.foundUser.name).replaceAll("\"","")}</p>`;
+          content.innerHTML += `<p id='age'>Age: ${JSON.stringify(resObj.foundUser.age).replaceAll("\"","")}</p>`;
+          content.innerHTML += `<p id='address'>Address: ${JSON.stringify(resObj.foundUser.address).replaceAll("\"","")}</p>`;
+          content.innerHTML += `<p id='phone'>Phone Number: ${JSON.stringify(resObj.foundUser.phone).replaceAll("\"","")}</p>`;
+          content.innerHTML += `<p id='weight'>Weight: ${JSON.stringify(resObj.foundUser.weight).replaceAll("\"","")}</p>`;
+          content.innerHTML += `<p id='height'>Height: ${JSON.stringify(resObj.foundUser.height).replaceAll("\"","")}</p>`;
         }
         else
         {
-          content.innerHTML += `<p>${JSON.stringify(resObj.message)}</p>`;
+          content.innerHTML += `<p id='message'>${JSON.stringify(resObj.message)}</p>`;
         }
         
       }
@@ -150,12 +152,12 @@
       <input id="searchUser" type="submit" value="Search" />
       <input id="deleteUser" type="submit" value="Delete" />
     </form>
-    <h3>Create New User</h3>
+    <h3>Create New User Or Update Existing User</h3>
     <form id="nameForm" action="/addUser" method="post">
       <label for="name">Name: </label>
       <input id="nameField" type="text" name="name" />
       <label for="age">Age: </label>
-      <input id="ageField" type="number" name="age" min="0" max="100" step="1"/>
+      <input id="ageField" type="number" name="age" min="0" max="110" step="1"/>
       <br><br>
       <label for="address">Address: </label>
       <input id="addressField" type="text" name="address" />
@@ -163,14 +165,14 @@
       <input id="phoneField" type="number" name="phone" min="1" max="9999999999" step="1"/>
       <br><br>
       <label for="weight">Weight: </label>
-      <input id="weightField" type="number" name="weight" min="0" max="100" step="1"/>
+      <input id="weightField" type="number" name="weight" min="0" max="1000" step="1"/>
       <label for="height">Height: </label>
-      <input id="heightField" type="number" name="height" min="0" max="100" step="1"/>
+      <input id="heightField" type="text" name="height"/>
       <br><br>
       <input type="submit" value="Add User" />
     </form>
   </section>
-  
+  <hr>
   <section id="content">
   </section>
 </body>

@@ -6,7 +6,7 @@ html, body {
 }
 
 #top {
-  text-align: center;
+  text-align: left;
   margin: 0 auto;
 }
 
@@ -18,4 +18,90 @@ html, body {
   margin-top: 100px;
   font-size: 2em;
   text-align: center;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+
+  grid-template-areas:
+  "title  title"
+  "message  message"
+  "name  address"
+  "age  phone"
+  "weight  weight"
+  "height  height";
+}
+
+b{
+  grid-area: title;
+  padding: 0px;
+  margin: 0px;
+}
+
+#success{
+  grid-area: title;
+  padding: 0px;
+  margin: 0px;
+  border: 2px solid black;
+}
+
+#message{
+  grid-area: message;
+  padding: 0px;
+  margin: 0px;
+}
+
+#name{
+  grid-area: name;
+  padding: 0px;
+  margin: 0px;
+  border-top: 2px solid black;
+  border-left: 2px solid black;
+  border-right: 2px solid black;
+}
+
+#age{
+  grid-area: age;
+  padding: 0px;
+  margin: 0px;
+  border-bottom: 2px solid black;
+  border-left: 2px solid black;
+  border-right: 2px solid black;
+}
+
+#address{
+  grid-area: address;
+  padding: 0px;
+  margin: 0px;
+  border-top: 2px solid black;
+  border-right: 2px solid black;
+}
+
+#phone{
+  grid-area: phone;
+  padding: 0px;
+  margin: 0px;
+  border-bottom: 2px solid black;
+  border-right: 2px solid black;
+}
+
+#weight{
+  grid-area: weight;
+  padding: 0px;
+  margin: 0px;
+  border-right: 2px solid black;
+  border-left: 2px solid black;
+}
+
+#height{
+  grid-area: height;
+  padding: 0px;
+  margin: 0px;
+  border-bottom: 2px solid black;
+  border-left: 2px solid black;
+  border-right: 2px solid black;
+}
+
+p{
+  font-size: 24px;
 }
