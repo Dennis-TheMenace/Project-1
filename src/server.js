@@ -20,11 +20,11 @@ const urlStruct = {
       '/notReal': jsonHandler.notRealMeta,
       notFound: jsonHandler.notFound,
     },
-    DELETE:
+  DELETE:
     {
       '/deleteUser': jsonHandler.deleteUser,
       notFound: jsonHandler.notFound,
-    }
+    },
 };
 
 const parseBody = (request, response, handler) => {
